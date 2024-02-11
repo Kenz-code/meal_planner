@@ -64,7 +64,7 @@ class _LoadMealsState extends State<LoadMeals> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: SpinKitThreeBounce(color: primary600)
+          child: MealLoading()
       ),
     );
   }

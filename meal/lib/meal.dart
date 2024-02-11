@@ -24,3 +24,4 @@ export 'package:meal/meal_snackbar.dart';
 export 'package:meal/meal_divider.dart';
 export 'package:meal/meal_navbar.dart';
 export 'package:meal/meal_app.dart';
+export 'package:meal/meal_loading.dart';
