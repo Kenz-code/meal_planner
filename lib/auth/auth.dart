@@ -35,6 +35,9 @@ class Auth {
       FirebaseFirestore.instance.collection('persons').doc(auth.uid).set({
         'persons': []
       });
+      FirebaseFirestore.instance.collection('groceries').doc(auth.uid).set({
+        'groceries': []
+      });
     }
   }
 

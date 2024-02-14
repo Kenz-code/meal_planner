@@ -10,11 +10,13 @@ class MealButton extends StatelessWidget {
   Color? outline_color;
   bool outline = false;
   bool underlined = false;
+  bool iconed = false;
   bool primary = true;
 
   MealButton.primary({super.key, required this.onPressed, required this.label, this.icon}) : primary = true;
   MealButton.primary_outline({super.key, required this.onPressed, required this.label, this.icon}) : primary = true, outline = true;
   MealButton.primary_text({super.key, required this.onPressed, required this.label, this.icon}) : primary = true, underlined = true;
+  MealButton.primary_icon({super.key, required this.onPressed, this.icon}) : primary = true, iconed = true, label = "";
   MealButton.secondary({super.key, required this.onPressed, required this.label, this.icon}) : color = second600, text_color = neutral100;
   MealButton.secondary_outline({super.key, required this.onPressed, required this.label, this.icon}) : color = Colors.transparent, text_color = second600, outline = true, outline_color = second600;
   MealButton.secondary_text({super.key, required this.onPressed, required this.label, this.icon}) : color = Colors.transparent, text_color = second600, underlined = true;
@@ -39,33 +41,55 @@ class MealButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setColors(context);
-    return outline == false ? FilledButton(
-      onPressed: onPressed,
-      child: MealText.body(label, color: text_color, underlined: underlined,),
-      style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll<Color>(color!),
-        padding: MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.all(16)),
-        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-            borderRadius: borderRadius
-        )),
-      ),
-    ) : OutlinedButton(
-          onPressed: onPressed,
-          child: MealText.body(label, color: text_color),
-          style: ButtonStyle(
+
+    if (outline == true) {
+      return OutlinedButton(
+        onPressed: onPressed,
+        child: MealText.body(label, color: text_color),
+        style: ButtonStyle(
             backgroundColor: MaterialStatePropertyAll<Color>(color!),
             padding: MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.all(16)),
             shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                 borderRadius: borderRadius
             )),
             side: MaterialStateBorderSide.resolveWith((states) {
-                if (states.contains(MaterialState.hovered)) {
-                  return BorderSide(color: outline_color!, width: 3.0);
-                }
-                return BorderSide(color: outline_color!, width: 2.0);
+              if (states.contains(MaterialState.hovered)) {
+                return BorderSide(color: outline_color!, width: 3.0);
               }
+              return BorderSide(color: outline_color!, width: 2.0);
+            }
             )
-          ),
-    );
+        ),
+      );
+    } else if (underlined == true) {
+      return FilledButton(
+        onPressed: onPressed,
+        child: MealText.body(label, color: text_color, underlined: underlined,),
+        style: ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll<Color>(color!),
+          padding: MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.all(16)),
+          shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: borderRadius
+          )),
+        ),
+      );
+    } else if (iconed == true) {
+      return IconButton(
+        onPressed: onPressed,
+        icon: Icon(icon, color: color),
+      );
+    } else {
+      return FilledButton(
+        onPressed: onPressed,
+        child: MealText.body(label, color: text_color, underlined: underlined,),
+        style: ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll<Color>(color!),
+          padding: MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.all(16)),
+          shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+              borderRadius: borderRadius
+          )),
+        ),
+      );
+    }
   }
 }

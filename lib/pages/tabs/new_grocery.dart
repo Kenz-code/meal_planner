@@ -31,7 +31,7 @@ class _NewGroceryState extends State<NewGrocery> {
     final auth = FirebaseAuth.instance.currentUser!;
     var db = FirebaseFirestore.instance;
     var _data;
-    final docRef = await db.collection('groceries').doc('groceries');
+    final docRef = await db.collection('groceries').doc(auth.uid);
     await docRef.get().then( (DocumentSnapshot doc) {
       _data = doc.data();
     } );
@@ -105,7 +105,7 @@ class _NewGroceryState extends State<NewGrocery> {
 
 
     var auth = FirebaseAuth.instance.currentUser!;
-    FirebaseFirestore.instance.collection('groceries').doc('groceries').update({
+    FirebaseFirestore.instance.collection('groceries').doc(auth.uid).update({
       'groceries': FieldValue.arrayUnion([nameController.text.toLowerCase()])
     });
 
