@@ -66,7 +66,7 @@ class _NewGroceryState extends State<NewGrocery> {
 
     // check for blank
     if (nameController.text == '') {
-      ScaffoldMessenger.of(context).showSnackBar(MealSnackbar.configure(context, 'All fields must be filled'));
+      ScaffoldMessenger.of(context).showSnackBar(MealSnackbar.configure(context, 'Item must be filled'));
       return;
     }
 

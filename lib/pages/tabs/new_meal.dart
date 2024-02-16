@@ -52,7 +52,7 @@ class _NewMealState extends State<NewMeal> {
     }
   }
 
-  Future<bool> checkDuplicates(String name, DateTime date) async {
+  Future<bool> checkDuplicates(DateTime date) async {
     // get the data
     final auth = FirebaseAuth.instance.currentUser;
     var _data;
@@ -72,8 +72,7 @@ class _NewMealState extends State<NewMeal> {
 
     // check the dupes
     for (var meal in meals){
-      print(meal);
-      if (name == meal['name'] && date == meal["date"].toDate()) {return true;}
+      if (date == meal["date"].toDate()) {return true;}
     }
     return false;
   }
@@ -83,15 +82,15 @@ class _NewMealState extends State<NewMeal> {
     var dateAfterMealIndex = addMealTime(DateTime.parse(dateController.text));
 
     // make sure nothing is blank
-    if (nameController.text == "" || personController == '' || dateController.text == '') {
+    if (nameController.text == "" || personController.text == '' || dateController.text == '') {
       // show snack bar message
-      ScaffoldMessenger.of(context).showSnackBar(MealSnackbar.configure(context, 'All fields must be filled'));
+      ScaffoldMessenger.of(context).showSnackBar(MealSnackbar.configure(context, 'Name, person and date must be filled'));
       return;
     }
 
     // check for duplicates
-    if (await checkDuplicates(nameController.text, dateAfterMealIndex) == true) {
-      ScaffoldMessenger.of(context).showSnackBar(MealSnackbar.configure(context, 'Duplicate item found'));
+    if (await checkDuplicates(dateAfterMealIndex) == true) {
+      ScaffoldMessenger.of(context).showSnackBar(MealSnackbar.configure(context, 'Already a meal at this time'));
     return;
     }
 

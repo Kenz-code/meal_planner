@@ -44,6 +44,29 @@ class _IdeasState extends State<Ideas> {
     ideas = data["ideas"];
     sortIdeas();
 
+    // if no meals, do this \/
+    if (ideas.isEmpty) {
+      return Scaffold(
+        drawer: CustomDrawer(index: 2),
+        appBar: MealAppbar(
+          label: "Meal Ideas",
+          darkMode: MealApp.of(context).darkMode!,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: MealRefresh(
+              onRefresh: _onRefresh,
+              child: Center(child: MealText.body("Press the + to create an idea.",))
+          ),
+
+        ),
+        floatingActionButton: MealFloatingButton(
+          onPressed: new_idea,
+          child: Icon(Icons.add_rounded),
+        ),
+      );
+    }
+
     return Scaffold(
       drawer: CustomDrawer(index: 2),
       appBar: MealAppbar(

@@ -52,7 +52,7 @@ class _NewMealState extends State<NewIdea> {
     // make sure nothing is blank
     if (nameController.text == "" || personController.text == "") {
       // show snack bar message
-      ScaffoldMessenger.of(context).showSnackBar(MealSnackbar.configure(context, 'All fields must be filled'));
+      ScaffoldMessenger.of(context).showSnackBar(MealSnackbar.configure(context, 'Idea and person must be filled'));
       return;
     }
 

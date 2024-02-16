@@ -108,6 +108,29 @@ class _MealsState extends State<Meals> {
     meals = data["meals"];
     sortMeals();
 
+    // if no meals, do this \/
+    if (meals.isEmpty) {
+      return Scaffold(
+        drawer: CustomDrawer(index: 0),
+        appBar: MealAppbar(
+          label: "Meals",
+          darkMode: MealApp.of(context).darkMode!,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: MealRefresh(
+              onRefresh: _onRefresh,
+              child: Center(child: MealText.body("Press the + to create a meal.",))
+          ),
+
+        ),
+        floatingActionButton: MealFloatingButton(
+          onPressed: new_meal,
+          child: Icon(Icons.add_rounded),
+        ),
+      );
+    }
+
     return Scaffold(
       drawer: CustomDrawer(index: 0),
       appBar: MealAppbar(

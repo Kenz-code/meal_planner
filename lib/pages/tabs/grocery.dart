@@ -85,6 +85,29 @@ class _GroceryState extends State<Grocery> {
     grocery_list = data["grocery_list"];
     sort_groceries();
 
+    // if no meals, do this \/
+    if (grocery_list.isEmpty) {
+      return Scaffold(
+        drawer: CustomDrawer(index: 1),
+        appBar: MealAppbar(
+          label: "Grocery List",
+          darkMode: MealApp.of(context).darkMode!,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: MealRefresh(
+              onRefresh: _onRefresh,
+              child: Center(child: MealText.body("Press the + to create a grocery.",))
+          ),
+
+        ),
+        floatingActionButton: MealFloatingButton(
+          onPressed: new_grocery,
+          child: Icon(Icons.add_rounded),
+        ),
+      );
+    }
+
     return Scaffold(
       drawer: CustomDrawer(index: 1),
       appBar: MealAppbar(
@@ -128,7 +151,6 @@ class Category extends StatelessWidget {
     // show nothing if there is no groceries
     if (groceries.isEmpty){return SizedBox.shrink();}
 
-    var head_theme = Theme.of(context).textTheme.titleMedium;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
