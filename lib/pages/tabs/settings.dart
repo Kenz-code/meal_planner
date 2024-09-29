@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meal_planner/main.dart';
 import 'package:meal_planner/widgets/global/drawer.dart';
 import 'package:meal_planner/auth/auth.dart';
 import 'package:meal_planner/services/settings/settings_service.dart';
-import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:meal/meal.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:meal_planner/widgets/features/settings_manageperson.dart';
@@ -40,6 +37,7 @@ class _SettingsState extends State<Settings> {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.version;
   }
+
 
   @override
   Widget build(BuildContext context) {

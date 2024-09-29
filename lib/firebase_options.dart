@@ -17,19 +17,13 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -52,11 +46,30 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyASSrlkgHsVrcPdvhdIv8moWbZ6qq6ynng',
+    appId: '1:29354551568:web:b59275b3846edaa6f35d95',
+    messagingSenderId: '29354551568',
+    projectId: 'meal-planner-b7971',
+    authDomain: 'meal-planner-b7971.firebaseapp.com',
+    storageBucket: 'meal-planner-b7971.appspot.com',
+    measurementId: 'G-J9GP0MLXN0',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAgkVeKydLcjPKJEdqxpPonckLvSsrlQQo',
     appId: '1:29354551568:android:2c447c7312621122f35d95',
     messagingSenderId: '29354551568',
     projectId: 'meal-planner-b7971',
     storageBucket: 'meal-planner-b7971.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCK-xYPEV9OmlHM9WKs8hrRxCiKDQjfoEQ',
+    appId: '1:29354551568:ios:d643d579c5772121f35d95',
+    messagingSenderId: '29354551568',
+    projectId: 'meal-planner-b7971',
+    storageBucket: 'meal-planner-b7971.appspot.com',
+    iosBundleId: 'com.kenbodev.mealPlanner',
   );
 }

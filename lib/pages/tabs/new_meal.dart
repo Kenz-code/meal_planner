@@ -128,11 +128,11 @@ class _NewMealState extends State<NewMeal> {
 
     switch (mealTypeView) {
       case MealTypes.breakfast:
-        dateAfterMealIndex = dateAfterMealIndex.add(Duration(hours: 9));
+        dateAfterMealIndex = dateAfterMealIndex.add(Duration(hours: 11));
       case MealTypes.lunch:
-        dateAfterMealIndex = dateAfterMealIndex.add(Duration(hours: 13));
+        dateAfterMealIndex = dateAfterMealIndex.add(Duration(hours: 14));
       case MealTypes.supper:
-        dateAfterMealIndex = dateAfterMealIndex.add(Duration(hours: 17));
+        dateAfterMealIndex = dateAfterMealIndex.add(Duration(hours: 21));
     }
 
     return dateAfterMealIndex;
